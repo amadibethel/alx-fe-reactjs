@@ -1,4 +1,5 @@
-import React from 'react';
+// src/UserInfo.jsx
+
 import UserDetails from './UserDetails';
 
 function UserInfo() {

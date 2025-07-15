@@ -1,4 +1,6 @@
-import React, { useContext } from 'react';
+// src/UserDetails.jsx
+
+import { useContext } from 'react';
 import UserContext from './UserContext';
 
 function UserDetails() {
@@ -6,8 +8,8 @@ function UserDetails() {
 
   return (
     <div>
-      <p><strong>Name:</strong> {userData.name}</p>
-      <p><strong>Email:</strong> {userData.email}</p>
+      <p>Name: {userData.name}</p>
+      <p>Email: {userData.email}</p>
     </div>
   );
 }

@@ -1,8 +1,9 @@
-import React from 'react';
-import UserProfile from './UserProfile';
+// src/ProfilePage.jsx
+
+import UserInfo from './UserInfo';
 
 function ProfilePage() {
-  return <UserProfile />;
+  return <UserInfo />;
 }
 
 export default ProfilePage;
