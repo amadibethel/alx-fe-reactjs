@@ -2,8 +2,8 @@ import React from 'react';
 
 function MainContent() {
   return (
-    <main style={{ padding: '20px', fontSize: '18px', backgroundColor: '#eef', minHeight: '300px' }}>
-      <p>Explore amazing cities around the world. Enjoy culture, history, and great food!</p>
+    <main style={{ padding: '20px', backgroundColor: '#f0f8ff', fontSize: '18px' }}>
+      <p>I love to visit New York, Paris, and Tokyo.</p>
     </main>
   );
 }
