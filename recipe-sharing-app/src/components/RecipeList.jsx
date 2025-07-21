@@ -1,5 +1,6 @@
 // src/components/RecipeList.jsx
 import React from 'react';
+import { Link } from 'react-router-dom'; // Required import
 import { useRecipeStore } from './recipeStore';
 
 const RecipeList = () => {
@@ -10,7 +11,9 @@ const RecipeList = () => {
       {filteredRecipes.length > 0 ? (
         filteredRecipes.map((recipe, index) => (
           <div key={index} className="recipe-card">
-            <h3>{recipe.title}</h3>
+            <h3>
+              <Link to={`/recipe/${index}`}>{recipe.title}</Link>
+            </h3>
             <p>{recipe.description}</p>
           </div>
         ))
