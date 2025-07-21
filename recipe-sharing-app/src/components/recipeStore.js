@@ -1,23 +1,17 @@
-import { create } from 'zustand';
-import { nanoid } from 'nanoid';
+// src/components/recipeStore.js
+import create from 'zustand';
 
 export const useRecipeStore = create((set) => ({
   recipes: [],
-  addRecipe: (title, description) =>
+  searchTerm: '',
+  filteredRecipes: [],
+  setRecipes: (recipes) => set({ recipes }),
+  setSearchTerm: (term) => {
+    set({ searchTerm: term });
     set((state) => ({
-      recipes: [
-        ...state.recipes,
-        { id: nanoid(), title, description }
-      ],
-    })),
-  updateRecipe: (id, updatedRecipe) =>
-    set((state) => ({
-      recipes: state.recipes.map((recipe) =>
-        recipe.id === id ? { ...recipe, ...updatedRecipe } : recipe
+      filteredRecipes: state.recipes.filter((recipe) =>
+        recipe.title.toLowerCase().includes(term.toLowerCase())
       ),
-    })),
-  deleteRecipe: (id) =>
-    set((state) => ({
-      recipes: state.recipes.filter((recipe) => recipe.id !== id),
-    })),
+    }));
+  },
 }));
