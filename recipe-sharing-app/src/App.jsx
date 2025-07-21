@@ -1,28 +1,35 @@
+// src/App.jsx
 import React, { useEffect } from 'react';
-import SearchBar from './components/SearchBar';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import RecipeList from './components/RecipeList';
-import { useRecipeStore } from './store/recipeStore';
+import SearchBar from './components/SearchBar';
+import RecipeDetails from './components/RecipeDetails'; // You can stub this for now
+import { useRecipeStore } from './components/recipeStore';
 
 const App = () => {
   const setRecipes = useRecipeStore((state) => state.setRecipes);
+  const setSearchTerm = useRecipeStore((state) => state.setSearchTerm);
 
   useEffect(() => {
-    // You can fetch your recipe data here
-    const data = [
-      { id: 1, title: 'Spaghetti Bolognese', description: 'With tomato sauce' },
-      { id: 2, title: 'Chicken Curry', description: 'Spicy and creamy' },
-      { id: 3, title: 'Salad', description: 'Fresh vegetables' },
+    const sampleRecipes = [
+      { title: 'Jollof Rice', description: 'West African spicy rice dish' },
+      { title: 'Egusi Soup', description: 'Melon seed soup with spinach' },
     ];
-
-    setRecipes(data);
-  }, [setRecipes]);
+    setRecipes(sampleRecipes);
+    setSearchTerm(''); // to initialize filtered list
+  }, [setRecipes, setSearchTerm]);
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4">Recipe Sharing App</h1>
-      <SearchBar />
-      <RecipeList />
-    </div>
+    <Router>
+      <div className="App">
+        <h1>Recipe Sharing App</h1>
+        <SearchBar />
+        <Routes>
+          <Route path="/" element={<RecipeList />} />
+          <Route path="/recipe/:id" element={<RecipeDetails />} />
+        </Routes>
+      </div>
+    </Router>
   );
 };
 
