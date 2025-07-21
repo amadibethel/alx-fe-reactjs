@@ -1,9 +1,9 @@
-// src/App.jsx
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import RecipeList from './components/RecipeList';
+import RecipeDetails from './components/RecipeDetails';
 import SearchBar from './components/SearchBar';
-import RecipeDetails from './components/RecipeDetails'; // You can stub this for now
+import AddRecipeForm from './components/AddRecipeForm'; // ✅ Import added
 import { useRecipeStore } from './components/recipeStore';
 
 const App = () => {
@@ -16,7 +16,7 @@ const App = () => {
       { title: 'Egusi Soup', description: 'Melon seed soup with spinach' },
     ];
     setRecipes(sampleRecipes);
-    setSearchTerm(''); // to initialize filtered list
+    setSearchTerm('');
   }, [setRecipes, setSearchTerm]);
 
   return (
@@ -24,8 +24,14 @@ const App = () => {
       <div className="App">
         <h1>Recipe Sharing App</h1>
         <SearchBar />
+        <Link to="/add">Add Recipe</Link> {/* Optional navigation */}
         <Routes>
-          <Route path="/" element={<RecipeList />} />
+          <Route path="/" element={
+            <>
+              <AddRecipeForm /> {/* Rendered here */}
+              <RecipeList />
+            </>
+          } />
           <Route path="/recipe/:id" element={<RecipeDetails />} />
         </Routes>
       </div>
