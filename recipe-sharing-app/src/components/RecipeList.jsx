@@ -1,27 +1,51 @@
-// src/components/RecipeList.jsx
-import React from 'react';
-import { Link } from 'react-router-dom'; // Required import
-import { useRecipeStore } from './recipeStore';
+// RecipeList component
+  import { useRecipeStore } from './recipeStore';
 
-const RecipeList = () => {
-  const filteredRecipes = useRecipeStore((state) => state.filteredRecipes);
+  const RecipeList = () => {
+    const recipes = useRecipeStore(state => state.recipes);
 
-  return (
-    <div>
-      {filteredRecipes.length > 0 ? (
-        filteredRecipes.map((recipe, index) => (
-          <div key={index} className="recipe-card">
-            <h3>
-              <Link to={`/recipe/${index}`}>{recipe.title}</Link>
-            </h3>
+    return (
+      <div>
+        {recipes.map(recipe => (
+          <div key={recipe.id}>
+            <h3>{recipe.title}</h3>
             <p>{recipe.description}</p>
           </div>
-        ))
-      ) : (
-        <p>No matching recipes found.</p>
-      )}
-    </div>
-  );
-};
+        ))}
+      </div>
+    );
+  };
 
-export default RecipeList;
+  // AddRecipeForm component
+  import { useState } from 'react';
+  import { useRecipeStore } from './recipeStore';
+
+  const AddRecipeForm = () => {
+    const addRecipe = useRecipeStore(state => state.addRecipe);
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
+
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      addRecipe({ id: Date.now(), title, description });
+      setTitle('');
+      setDescription('');
+    };
+
+    return (
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder="Title"
+        />
+        <textarea
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          placeholder="Description"
+        />
+        <button type="submit">Add Recipe</button>
+      </form>
+    );
+  };
