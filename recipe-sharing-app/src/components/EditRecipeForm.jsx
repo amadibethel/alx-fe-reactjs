@@ -8,12 +8,8 @@ const EditRecipeForm = ({ recipe }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    updateRecipe({
-      ...recipe,
-      title,
-      description,
-    });
-    alert("Recipe updated successfully!");
+    updateRecipe({ ...recipe, title, description });
+    alert('Recipe updated!');
   };
 
   return (
@@ -30,7 +26,7 @@ const EditRecipeForm = ({ recipe }) => {
         onChange={(e) => setDescription(e.target.value)}
         required
       />
-      <button type="submit">Save Changes</button>
+      <button type="submit">Update</button>
     </form>
   );
 };

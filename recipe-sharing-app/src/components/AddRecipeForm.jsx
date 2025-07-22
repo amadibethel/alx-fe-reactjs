@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useRecipeStore } from './recipeStore'; // Updated path
+import { useRecipeStore } from './recipeStore';
 
 const AddRecipeForm = () => {
   const addRecipe = useRecipeStore((state) => state.addRecipe);
@@ -8,20 +8,14 @@ const AddRecipeForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!title.trim() || !description.trim()) return;
-
-    addRecipe({
-      id: Date.now(),
-      title,
-      description,
-    });
-
+    addRecipe({ id: Date.now(), title, description });
     setTitle('');
     setDescription('');
   };
 
   return (
     <form onSubmit={handleSubmit}>
+      <h3>Add Recipe</h3>
       <input
         type="text"
         placeholder="Title"
@@ -35,7 +29,7 @@ const AddRecipeForm = () => {
         onChange={(e) => setDescription(e.target.value)}
         required
       />
-      <button type="submit">Add Recipe</button>
+      <button type="submit">Add</button>
     </form>
   );
 };

@@ -4,14 +4,12 @@ import AddRecipeForm from './components/AddRecipeForm';
 import RecipeList from './components/RecipeList';
 import RecipeDetails from './components/RecipeDetails';
 
-function App() {
+const App = () => {
   return (
     <Router>
       <div style={{ maxWidth: '600px', margin: '2rem auto' }}>
-        <h1> Recipe Sharing App</h1>
-        <nav>
-          <Link to="/">Home</Link>
-        </nav>
+        <h1>Recipe Sharing App</h1>
+        <nav><Link to="/">Home</Link></nav>
         <Routes>
           <Route
             path="/"
@@ -27,6 +25,6 @@ function App() {
       </div>
     </Router>
   );
-}
+};
 
 export default App;
