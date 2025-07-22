@@ -1,28 +1,42 @@
-// src/App.jsx
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import FavoritesList from './components/FavoritesList';
-import RecommendationsList from './components/RecommendationsList';
 import RecipeList from './components/RecipeList';
-// Import other pages like AddRecipeForm, EditRecipeForm, etc.
+import RecipeDetails from './components/RecipeDetails';
+import SearchBar from './components/SearchBar';
+import AddRecipeForm from './components/AddRecipeForm'; // ✅ Import added
+import { useRecipeStore } from './components/recipeStore';
 
-function App() {
+const App = () => {
+  const setRecipes = useRecipeStore((state) => state.setRecipes);
+  const setSearchTerm = useRecipeStore((state) => state.setSearchTerm);
+
+  useEffect(() => {
+    const sampleRecipes = [
+      { title: 'Jollof Rice', description: 'West African spicy rice dish' },
+      { title: 'Egusi Soup', description: 'Melon seed soup with spinach' },
+    ];
+    setRecipes(sampleRecipes);
+    setSearchTerm('');
+  }, [setRecipes, setSearchTerm]);
+
   return (
     <Router>
-      <nav className="p-4 bg-gray-200 mb-4">
-        <Link to="/" className="mr-4">Home</Link>
-        <Link to="/favorites" className="mr-4">Favorites</Link>
-        <Link to="/recommendations">Recommendations</Link>
-      </nav>
-
-      <Routes>
-        <Route path="/" element={<RecipeList />} />
-        <Route path="/favorites" element={<FavoritesList />} />
-        <Route path="/recommendations" element={<RecommendationsList />} />
-        {/* Include other routes like AddRecipeForm, EditRecipeForm */}
-      </Routes>
+      <div className="App">
+        <h1>Recipe Sharing App</h1>
+        <SearchBar />
+        <Link to="/add">Add Recipe</Link> {/* Optional navigation */}
+        <Routes>
+          <Route path="/" element={
+            <>
+              <AddRecipeForm /> {/* ✅ Rendered here */}
+              <RecipeList />
+            </>
+          } />
+          <Route path="/recipe/:id" element={<RecipeDetails />} />
+        </Routes>
+      </div>
     </Router>
   );
-}
+};
 
 export default App;
