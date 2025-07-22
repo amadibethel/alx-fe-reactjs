@@ -1,12 +1,12 @@
-// src/components/FavoritesList.jsx
-import React from 'react';
-import { useRecipeStore } from './recipeStore';
+import { useRecipeStore } from '../store/recipeStore'
 
 const FavoritesList = () => {
-  const { favorites, recipes } = useRecipeStore();
-  const favoriteRecipes = favorites
-    .map((id) => recipes.find((recipe) => recipe.id === id))
-    .filter(Boolean);
+  const recipes = useRecipeStore((state) => state.recipes)
+  const favorites = useRecipeStore((state) => state.favorites)
+
+  const favoriteRecipes = recipes.filter((recipe) =>
+    favorites.includes(recipe.id)
+  )
 
   return (
     <div>
@@ -15,14 +15,14 @@ const FavoritesList = () => {
         <p>No favorites yet.</p>
       ) : (
         favoriteRecipes.map((recipe) => (
-          <div key={recipe.id} className="border p-2 mb-2">
+          <div key={recipe.id} style={{ border: '1px solid #ccc', padding: '10px', margin: '5px 0' }}>
             <h3>{recipe.title}</h3>
             <p>{recipe.description}</p>
           </div>
         ))
       )}
     </div>
-  );
-};
+  )
+}
 
-export default FavoritesList;
+export default FavoritesList
