@@ -18,7 +18,7 @@ export const fetchUserData = async (username) => {
 };
 
 /**
- * Search GitHub users with optional filters.
+ * Search GitHub users with optional filters such as username, location, and minimum repos.
  * @param {string} username - GitHub username or keyword to search.
  * @param {string} location - Location filter.
  * @param {string|number} minRepos - Minimum public repositories filter.
@@ -42,13 +42,16 @@ export const searchUsers = async (username = "", location = "", minRepos = "") =
   query = query.trim();
 
   if (!query) {
+    // No search parameters provided; return empty list.
     return [];
   }
 
   try {
+    // Construct the full API URL with encoded query and per_page limit.
     const response = await axios.get(
       `${BASE_URL}/search/users?q=${encodeURIComponent(query)}&per_page=30`
     );
+    // Return the array of user items.
     return response.data.items || [];
   } catch (error) {
     console.error("GitHub API searchUsers error:", error);
