@@ -1,12 +1,12 @@
-// App.jsx
-import React from 'react';
-import SearchBar from './components/SearchBar';
+// src/App.jsx
+import React from "react";
+import Search from "./components/Search";
 
 function App() {
   return (
     <div style={{ padding: "2rem" }}>
       <h1>GitHub User Search</h1>
-      <SearchBar />
+      <Search />
     </div>
   );
 }
