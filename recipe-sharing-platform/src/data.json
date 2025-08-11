@@ -3,6 +3,7 @@
     "id": "1",
     "title": "Spaghetti Bolognese",
     "image": "/images/spaghetti.jpg",
+    "summary": "A classic Italian pasta dish with a rich and savory meat sauce.",
     "ingredients": [
       "200g spaghetti",
       "100g minced beef",
@@ -22,6 +23,7 @@
     "id": "2",
     "title": "Classic Pancakes",
     "image": "/images/pancakes.jpg",
+    "summary": "Fluffy pancakes perfect for a delicious breakfast treat.",
     "ingredients": [
       "1 cup flour",
       "2 tablespoons sugar",
