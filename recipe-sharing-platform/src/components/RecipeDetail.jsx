@@ -7,7 +7,7 @@ function RecipeDetail() {
   const [recipe, setRecipe] = useState(null);
 
   useEffect(() => {
-    const foundRecipe = recipesData.find((r) => r.id === id);
+    const foundRecipe = recipesData.find(r => r.id === id);
     setRecipe(foundRecipe);
   }, [id]);
 
@@ -21,14 +21,14 @@ function RecipeDetail() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
+    <div className="max-w-4xl mx-auto p-6 shadow-lg rounded-lg bg-white">
       <Link to="/" className="text-blue-600 underline mb-6 inline-block">← Back to Home</Link>
 
       <h1 className="text-3xl font-bold mb-4">{recipe.title}</h1>
       <img
         src={recipe.image}
         alt={recipe.title}
-        className="w-full h-64 object-cover rounded-lg mb-6"
+        className="w-full h-64 object-cover rounded-lg mb-6 shadow-md"
       />
 
       <section className="mb-8">
