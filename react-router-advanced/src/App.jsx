@@ -1,11 +1,9 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Home from './pages/Home';
-import Profile from './pages/Profile';
-import ProfileDetails from './pages/ProfileDetails';
-import ProfileSettings from './pages/ProfileSettings';
-import BlogPost from './pages/BlogPost';
 import Login from './pages/Login';
-import ProtectedRoute from './routes/ProtectedRoute';
+import Profile from './components/Profile';
+import ProtectedRoute from './components/ProtectedRoute';
+import BlogPost from './pages/BlogPost';
 
 export default function App() {
   return (
@@ -13,7 +11,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
 
-        {/* Protected nested route */}
+        {/* Protected route for Profile */}
         <Route
           path="/profile/*"
           element={
@@ -21,18 +19,15 @@ export default function App() {
               <Profile />
             </ProtectedRoute>
           }
-        >
-          <Route path="details" element={<ProfileDetails />} />
-          <Route path="settings" element={<ProfileSettings />} />
-        </Route>
+        />
 
-        {/* Dynamic route example */}
-        <Route path="/blog/:postId" element={<BlogPost />} />
+        {/* Dynamic route for blog posts */}
+        <Route path="/blog/:id" element={<BlogPost />} />
 
-        {/* Login route */}
+        {/* Login */}
         <Route path="/login" element={<Login />} />
 
-        {/* Catch all - redirect unknown routes */}
+        {/* Catch-all redirect */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>
