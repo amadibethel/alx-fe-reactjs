@@ -1,7 +1,7 @@
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
-// ✅ Yup validation schema
+// Yup validation schema
 const validationSchema = Yup.object({
   username: Yup.string().required("Username is required"),
   email: Yup.string()
@@ -12,14 +12,14 @@ const validationSchema = Yup.object({
     .required("Password is required"),
 });
 
-// ✅ Formik integration + validation logic
-export default function FormikForm() {
+// formik integration + validation logic
+export default function formikForm() {
   return (
-    <Formik
+    <formik
       initialValues={{ username: "", email: "", password: "" }}
       validationSchema={validationSchema}
       onSubmit={(values, { setSubmitting, resetForm }) => {
-        console.log("Formik Submitted:", values);
+        console.log("formik Submitted:", values);
 
         // Simulated API call
         fetch("https://jsonplaceholder.typicode.com/users", {
@@ -37,7 +37,7 @@ export default function FormikForm() {
     >
       {({ isSubmitting }) => (
         <Form className="p-4 space-y-3 border rounded-md w-80">
-          <h2 className="text-xl font-bold">User Registration (Formik)</h2>
+          <h2 className="text-xl font-bold">User Registration (formik)</h2>
 
           <div>
             <Field
@@ -89,6 +89,6 @@ export default function FormikForm() {
           </button>
         </Form>
       )}
-    </Formik>
+    </formik>
   );
 }
