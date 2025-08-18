@@ -1,7 +1,7 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
-// ✅ Yup validation schema
+// Yup validation schema
 const validationSchema = Yup.object({
   username: Yup.string().required("Username is required"),
   email: Yup.string()
@@ -12,7 +12,7 @@ const validationSchema = Yup.object({
     .required("Password is required"),
 });
 
-// ✅ Formik integration + validation logic
+// Formik integration + validation logic
 export default function FormikForm() {
   return (
     <Formik
