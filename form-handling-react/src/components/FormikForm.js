@@ -13,7 +13,7 @@ const validationSchema = Yup.object({
 });
 
 // Formik integration + validation logic
-export default function formikForm() {
+export default function FormikForm() {
   return (
     <Formik
       initialValues={{ username: "", email: "", password: "" }}
