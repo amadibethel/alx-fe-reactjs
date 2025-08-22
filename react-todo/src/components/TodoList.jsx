@@ -1,22 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
+import { useState } from "react";
+import AddTodoForm from "./AddTodoForm";
 
-const TodoList = () => {
+function TodoList() {
+  // Initial state with demo todos
   const [todos, setTodos] = useState([
     { id: 1, text: "Learn React", completed: false },
-    { id: 2, text: "Build Todo App", completed: false },
+    { id: 2, text: "Build a Todo App", completed: false },
   ]);
-  const [input, setInput] = useState("");
 
-  const addTodo = (e) => {
-    e.preventDefault();
-    if (!input.trim()) return;
-    setTodos([
-      ...todos,
-      { id: Date.now(), text: input.trim(), completed: false },
-    ]);
-    setInput("");
+  // Function to add a new todo
+  const addTodo = (text) => {
+    const newTodo = { id: Date.now(), text, completed: false };
+    setTodos([...todos, newTodo]);
   };
 
+  // Function to toggle completion status
   const toggleTodo = (id) => {
     setTodos(
       todos.map((todo) =>
@@ -25,22 +24,15 @@ const TodoList = () => {
     );
   };
 
+  // Function to delete a todo
   const deleteTodo = (id) => {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 
   return (
     <div>
-      <h1>Todo List</h1>
-      <form onSubmit={addTodo}>
-        <input
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="Enter a todo"
-        />
-        <button type="submit">Add Todo</button>
-      </form>
+      <h2>Todo List</h2>
+      <AddTodoForm onAddTodo={addTodo} />
       <ul>
         {todos.map((todo) => (
           <li
@@ -51,12 +43,7 @@ const TodoList = () => {
             }}
           >
             <span onClick={() => toggleTodo(todo.id)}>{todo.text}</span>
-            <button
-              onClick={(e) => {
-                e.stopPropagation(); // prevent toggle when deleting
-                deleteTodo(todo.id);
-              }}
-            >
+            <button data-testid={`delete-${todo.id}`} onClick={() => deleteTodo(todo.id)} style={{ marginLeft: "10px" }} >
               Delete
             </button>
           </li>
@@ -64,6 +51,6 @@ const TodoList = () => {
       </ul>
     </div>
   );
-};
+}
 
 export default TodoList;
